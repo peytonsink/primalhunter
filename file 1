@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Primal Hunter Archive</title>
+    <!-- Load Tailwind CSS for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a game/fantasy feel */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Cinzel:wght@700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117; /* Dark background */
+            color: #c9d1d9; /* Light text */
+        }
+        .cinzel {
+            font-family: 'Cinzel', serif;
+        }
+        .book-card {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .book-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.05);
+        }
+        .details-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;
+        }
+        .details-content.open {
+            max-height: 500px; /* Large enough value to show all content */
+            padding-top: 1rem;
+        }
+        /* Style for the navigation links */
+        .nav-link {
+            transition: color 0.2s, border-color 0.2s;
+        }
+        .nav-link.active {
+            color: #fcd34d; /* yellow-400 */
+            border-bottom: 2px solid #fcd34d;
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Global Navigation -->
+    <nav class="flex justify-center mb-10 border-b border-gray-700 pb-4">
+        <button id="nav-home" class="nav-link px-4 py-2 mx-2 text-lg font-semibold text-gray-400 border-b-2 border-transparent active" onclick="showView('home-view')">
+            Home
+        </button>
+        <button id="nav-archive" class="nav-link px-4 py-2 mx-2 text-lg font-semibold text-gray-400 border-b-2 border-transparent" onclick="showView('archive-view')">
+            Book Archive
+        </button>
+    </nav>
+
+
+    <!-- HOME VIEW -->
+    <div id="home-view" class="max-w-4xl mx-auto text-center p-8 bg-gray-800 rounded-xl shadow-2xl border border-red-700/50">
+        <h1 class="text-5xl md:text-7xl font-extrabold cinzel text-yellow-400 mb-4">
+            WELCOME TO THE SYSTEM
+        </h1>
+        <p class="text-2xl text-red-400 mb-8">
+            The World Has Changed. Power is All That Matters.
+        </p>
+
+        <div class="text-left space-y-6 text-lg text-gray-300">
+            <h2 class="text-3xl font-bold cinzel text-red-500">The Primal Hunter Saga</h2>
+            <p>
+                Dive into the epic LitRPG adventure of Jake Thayne, an ordinary office worker whose life is turned upside down when Earth is integrated into the vast Multiverse by the mysterious "System." This new reality replaces the old world with monsters, levels, skills, and a brutal path to power where cosmic Gods can threaten entire universes.
+            </p>
+            <p>
+                Jake, upon unlocking the **Primal Hunter Bloodline**, learns it grants him 360-degree perception, immunity to powerful presences, and improved instinct, allowing him to become one of the strongest people of his generation. 
+            </p>
+            <p class="text-xl font-semibold mt-6 text-red-300">
+                Are you ready to track the Hunter's progress across 13 volumes of non-stop progression and world exploration?
+            </p>
+        </div>
+
+        <button class="mt-8 py-3 px-8 bg-red-600 hover:bg-red-700 rounded-lg text-white font-bold text-xl transition duration-200 shadow-lg" onclick="showView('archive-view')">
+            Explore The Book Archive
+        </button>
+    </div>
+
+
+    <!-- ARCHIVE VIEW (Existing Content) -->
+    <div id="archive-view" class="hidden">
+        <header class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-extrabold cinzel text-yellow-400 mb-2">
+                THE HUNTER'S PATH
+            </h1>
+            <p class="text-xl text-gray-400">An Archival Record of Jake Thayne's Progression </p>
+        </header>
+
+        <!-- Book Cards Container -->
+        <div id="book-container" class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Content will be injected here by JavaScript -->
+        </div>
+    </div>
+
+
+    <!-- JavaScript for Data and Functionality -->
+    <script>
+        // --- Data Definitions ---
+
+        const primalHunterBooks = [
+            {
+                number: 1,
+                title: "The Primal Hunter",
+                arc: "The System arrives, plunging Earth into 'The Tutorial.' Jake, an office worker, gains the Primal Hunter bloodline. He fights people and monsters, and also encounters a god called the Malefic Viper, one of the 12 Primordials.",
+                skills: ["Primal Hunter Class (E-Rank)", "Archery Mastery (Evolved)", "Primal Hunter Bloodline Awakening", "Basic Alchemy"]
+            },
+            {
+                number: 2,
+                title: "The Primal Hunter 2",
+                arc: "Jake moves beyond the initial tutorial zone. He learns of four strong Beast Lords in four different dungeons. By defeating them all, he can challenge the King of the Forest, the only known D-Rank entity in the Tutorial. Jake achieves his **D-Rank Class Ascension** in this volume.",
+                skills: ["E-Rank Mastery (Perfected)", "Mana Shaping & Control", "Advanced Poison Mastery"]
+            },
+            {
+                number: 3,
+                title: "The Primal Hunter 3",
+                arc: "Earth's integration phase is extended. Jake, having defeated the only known D-Rank entity in the Tutorial, becomes the Progenitor of Universe 93. He establishes the town of Haven, securing it with a town core and delegating management to focus on his growth. During this time, he meets a talking hawk named Hawkie and her child, Sylphian.",
+                skills: ["Mana Manipulation (D-Rank Limits)", "Arrow of the Ambitious Hunter", "Avaricious Arcane Hunter class"]
+            },
+            {
+                number: 4,
+                title: "The Primal Hunter 4",
+                arc: "TJake fight the mushroom under his home and poo throwing monkeys. Also It is almost time for the world congress were the world powers and faction get pulled in to talk about the world future. Jake not caring about politic use this time to meat up with the strong people. But surprisingly a lot of strong people jake know from his past.",
+                skills: ["Descending Dark Fang", "Enhanced Splitting Arrow", "Path of the Heretic-Chosen (Unique)", "arrow of horizon edge"]
+            },
+            {
+                number: 5,
+                title: "The Primal Hunter 5",
+                arc: "Jake joining the treasure hunt in the ancient land of yalsten an old forgotten world were there is a great curse. Trying to survive the people turned them selves in to vampires But were there is great challenge there is great gains. In the land there are towers each one having a strong enemy vampire. And once they are all dead the boss will regain it true form. And he is looking forward to a fight with the world second strongest person the sword saint Noboru Miyamoto.",
+                skills: ["Limit Break (Rare)", "Disruptive Arcane Wave (Rare)", "Arcane Stealth (Rare)"]
+            },
+            {
+                number: 6,
+                title: "The Primal Hunter 6",
+                arc: "Back from the treasure hunt jake goes to see his family and gose to a auction were he gets to bid on a position that will bring bake the king of the forest so they can fight. He also invades a hive of termites but there was a c rank bug. So to kill the bug jake make a weapon using the curse that fell on Yalsteen to make a vary strong weapon",
+                skills: ["Identify (Rare)", "High-Rank Poison Mastery", "Touch of the Malefic Viper (Epic)"]
+            },
+            {
+                number: 7,
+                title: "The Primal Hunter 7",
+                arc: "Jake arrives at the order of the malefic viper were he is trying to hide the fact that he is the chosen of the malefic viper. Will trying to to sell vampire stuff from the the secreted realm. And trying change the fate of the person under him. But wile that is happening earth still need him",
+                skills: ["Sense of the Malefic Viper (Epic)", "Descending Dark Arcane Fang (Epic)", "Limit Shatter (Epic)"]
+            },
+            {
+                number: 8,
+                title: "The Primal Hunter 8",
+                arc: "Jake get a call from earth that they are under attack by unknown forces lead by some one called Ell'Hakan who is the chosen of a god call yip of yore with a bloodline that can influence emotions and who dose not fight fair after walking in to a trap jake is flung across the world and meets a worm called sandy and helped him evolve to travel bake to fight Ell'Hakan but he run before it is an option",
+                skills: ["Fangs of Man (Epic)", "Descending Dark Arcane Fang (Epic)", "Archery of Expanding Horizons"]
+            },
+            {
+                number: 9,
+                title: "The Primal Hunter 9",
+                arc: "Jake dealing with the invasion of earth now now he has a rival chosen trying to kill him make the file push to c rank by kill a lot of bugs and officially coming out as the chosen of the malefic viper",
+                skills: ["Hunter’s Blade-Fang Style", "Double-Layered Arrow of the Ambitious Arcane Hunter (Epic)", "Conjure Virtual Mind (Epic)"] 
+            },
+            {
+                number: 10,
+                title: "The Primal Hunter 10",
+                arc: "Jake to nethermore a dungeon that can make year in to 50 were a composition to see who is the strongest in the universe c ranks with him are sword saint, the king of the forest,Sylphian, and dina from the pantheon of life",
+                skills: ["Archery of Expanding Horizons (Epic)"]
+            },
+            {
+                number: 11,
+                title: "The Primal Hunter 11",
+                arc: "Jake in nethermore challenge the challenge dungeon witch are one of the only ways to truly win in the end jake challenges the Colosseum of Mortals and keeps wining until he flight the champion and scaled down version of a god so jake use his bloodline to really win",
+                skills: ["Full Control over Bloodline Artifacts", "Ultimate C-Rank Skill Development", "Strategic Weakness Analysis"]
+            },
+            {
+                number: 12,
+                title: "The Primal Hunter 12",
+                arc: "Climax of a multi-book arc, involving a massive, drawn-out battle against a powerful transcendent champion of the Celestial Court. Jake pushes the absolute limits of his C-Rank existence, using every mastered skill and loophole to achieve a strategic victory and a temporary stalemate, preventing the champion from achieving their objective.",
+                skills: ["Scales of the Malefic Viper (Ancient)", "Heretical Ritualism of the Malefic Viper (Ancient)", "Arcane Stalker (Ancient)"]
+            },
+            {
+                number: 13,
+                title: "The Primal Hunter 13",
+                arc: "The battle for the Milky Way Galaxy officially begins. Jake, still a C-Rank Hunter, faces the massive coalition led by Ell'Hakan and becomes embroiled in the conflicts between two legendary entities: the Malefic Viper and Yip of Yore.",
+                skills: ["Arcane-Shadow Vault of the Avaricious Arcane Hunter (Ancient)", "Avaricious Arcane Hunter’s Arrows (Ancient)", "Horizon-Chasing Big Game Arcane Hunter (Ancient)"]
+            }
+        ];
+
+        // Inline SVG for the Bow and Arrow cover art
+        const BOW_ARROW_SVG = `
+            <svg class="w-12 h-12 text-yellow-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2v20M5 12h14M18 17l6-5-6-5M5 17l6-5-6-5"/>
+            </svg>
+        `;
+
+
+        // --- DOM Elements & State ---
+
+        const container = document.getElementById('book-container');
+        const homeView = document.getElementById('home-view');
+        const archiveView = document.getElementById('archive-view');
+        const navHome = document.getElementById('nav-home');
+        const navArchive = document.getElementById('nav-archive');
+
+        // Flags to track if content has been rendered
+        let cardsRendered = false;
+
+        // --- Rendering Functions ---
+
+        // Function to create and render a book card (Archived logic remains the same)
+        function renderBookCards() {
+            if (cardsRendered) {
+                return; 
+            }
+            container.innerHTML = '';
+            
+            primalHunterBooks.forEach(book => {
+                const card = document.createElement('div');
+                card.className = 'book-card bg-gray-800 rounded-xl shadow-xl border border-gray-700 p-0 flex flex-col justify-between overflow-hidden'; // Removed padding and added overflow hidden
+                
+                // 1. Cover Section (New)
+                const coverSection = document.createElement('div');
+                coverSection.className = 'flex flex-col items-center justify-center p-6 bg-gray-900 border-b-2 border-yellow-400';
+                coverSection.innerHTML = `
+                    <div class="w-20 h-20 flex items-center justify-center bg-gray-800 rounded-full mb-3 border-4 border-red-500 shadow-lg">
+                        ${BOW_ARROW_SVG}
+                    </div>
+                    <h3 class="text-3xl font-semibold cinzel text-yellow-400 text-center">${book.title}</h3>
+                    <span class="text-xl cinzel font-bold text-red-500 mt-1">Volume ${book.number}</span>
+                `;
+                card.appendChild(coverSection);
+
+                // 2. Details and Toggle (Existing, now with padding)
+                const mainContent = document.createElement('div');
+                mainContent.className = 'p-6 flex flex-col justify-between flex-grow';
+
+                const detailsContent = document.createElement('div');
+                detailsContent.className = 'details-content';
+
+                // Initial Plot Arc Summary (always visible when card is created)
+                mainContent.innerHTML += `
+                    <div class="mb-4">
+                        <h4 class="font-bold text-red-300 mb-2">Key Progression & Skills</h4>
+                        <ul class="space-y-1">
+                            ${book.skills.slice(0, 3).map(skill => `<li class="text-sm list-disc ml-4 text-gray-400">${skill}</li>`).join('')}
+                        </ul>
+                        <p class="text-xs text-gray-500 mt-2">... and ${book.skills.length - 3} more details hidden</p>
+                    </div>
+                `;
+
+
+                detailsContent.innerHTML += `
+                    <div class="mb-4 p-4 bg-gray-700/50 rounded-lg">
+                        <h4 class="font-bold text-red-300 mb-2">Full Plot Arc</h4>
+                        <p class="text-gray-300 text-sm">${book.arc}</p>
+                    </div>
+                    <div class="p-4 bg-gray-700/50 rounded-lg">
+                        <h4 class="font-bold text-red-300 mb-2">All Skills & Progression</h4>
+                        <ul class="space-y-1">
+                            ${book.skills.map(skill => `<li class="text-sm list-disc ml-4 text-gray-400">${skill}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+                
+                mainContent.appendChild(detailsContent);
+
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'mt-4 w-full py-2 bg-red-600 hover:bg-red-700 rounded-lg text-white font-bold transition duration-200';
+                toggleButton.textContent = 'View Full Details ↓';
+
+                let isOpen = false;
+                toggleButton.onclick = () => {
+                    isOpen = !isOpen;
+                    detailsContent.classList.toggle('open', isOpen);
+                    toggleButton.textContent = isOpen ? 'Hide Full Details ↑' : 'View Full Details ↓';
+                };
+
+                mainContent.appendChild(toggleButton);
+                card.appendChild(mainContent);
+                container.appendChild(card);
+            });
+            cardsRendered = true; 
+        }
+        
+        // --- View Controller ---
+
+        // Function to switch between views
+        function showView(viewId) {
+            // Hide all views
+            homeView.classList.add('hidden');
+            archiveView.classList.add('hidden');
+
+            // Reset active state for navigation links
+            navHome.classList.remove('active');
+            navArchive.classList.remove('active');
+
+            // Show the requested view
+            if (viewId === 'home-view') {
+                homeView.classList.remove('hidden');
+                navHome.classList.add('active');
+            } else if (viewId === 'archive-view') {
+                archiveView.classList.remove('hidden');
+                navArchive.classList.add('active');
+                renderBookCards(); 
+            }
+        }
+        
+        // Initial setup
+        window.onload = () => {
+            // Start on the home page
+            showView('home-view');
+        };
+    </script>
+
+</body>
+</html>
